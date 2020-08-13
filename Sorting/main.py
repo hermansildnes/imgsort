@@ -7,7 +7,7 @@ import mkdirs
 
 args = argparser.parse()
 
-IMGPATH = os.path.join(str(Path.home()), "Pictures")
-IMGSORTPATH = os.path.join(IMGPATH, "imgSort")
+imgPath = os.path.join(str(Path.home()), "Pictures")
+imgSortPath = mkdirs.loadDirs(imgPath, os.path.join(imgPath, "imgSort"))
 
-IMGSORTPATH = mkdirs.loadDirs(IMGPATH, IMGSORTPATH)
+print(os.listdir(args.Path))
