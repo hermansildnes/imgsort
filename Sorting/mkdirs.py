@@ -1,4 +1,5 @@
-# Functions for creating directories if they dont exsist, or if a new person is added
+# Functions for creating directories if they
+# dont exsist, or if a new person is added
 import os
 from pathlib import Path
 import time

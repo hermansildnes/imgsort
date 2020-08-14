@@ -2,27 +2,22 @@
 import os
 from pathlib import Path
 from PIL import Image
+import shutil
 import argparser
 import mkdirs
+import exifhandler
+from sort import sort
 
-file = open("output.txt", "w")
-# args = argparser.parse()
-impath = Path(os.path.join(Path.home(), "TEST"))
+args = argparser.parse()
+if args.path:
+    imgPath = args.path
+else:
+    imgPath = Path(os.path.join(Path.home(), "TEST"))
 
-imgPath = os.path.join(str(Path.home()), "Pictures")
-imgSortPath = mkdirs.loadDirs(imgPath, os.path.join(imgPath, "imgSort"))
+imgSortPath = mkdirs.loadDirs(
+    imgPath, os.path.join(Path.home(), "Pictures", "imgSort")
+)
 
-pList = os.listdir(impath)
-exifList = {}
+exifList = exifhandler.createExifList(os.listdir(imgPath), imgPath)
 
-for pic in pList:
-    try:
-        img = Image.open(os.path.join(impath, pic))
-    except IOError:
-        pass
-
-    exif = img.getexif()
-
-    exifList[str(pic)] = str(exif[36867])[0:10]
-file.write(str(exifList))
-file.close()
+sort(exifList, imgPath, imgSortPath)
