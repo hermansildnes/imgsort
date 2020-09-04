@@ -10,7 +10,7 @@ from sort import sort
 
 args = argparser.parse()
 if args.path:
-    imgPath = args.path
+    imgPath = Path(args.path)
 else:
     imgPath = Path(os.path.join(Path.home(), "TEST"))
 
@@ -18,6 +18,6 @@ imgSortPath = mkdirs.loadDirs(
     imgPath, os.path.join(Path.home(), "Pictures", "imgSort")
 )
 
-exifList = exifhandler.createExifList(os.listdir(imgPath), imgPath)
 
+exifList = exifhandler.createExifList(os.listdir(imgPath), imgPath)
 sort(exifList, imgPath, imgSortPath)
